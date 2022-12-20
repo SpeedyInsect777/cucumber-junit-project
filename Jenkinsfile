@@ -2,16 +2,13 @@ node {
     stage('Clone code') {
         git 'https://github.com/SpeedyInsect777/cucumber-junit-project'
     }
-
     stage('Run tests'){
         if(isUnix()){
             sh "mvn clean test"
         } else {
             bat "mvn clean test -Dcucumber.filter.tags=\"@smoke\" "
         }
-
     }
-
     stage('Generate report'){
            cucumber failedFeaturesNumber: -1,
             failedScenariosNumber: -1,
